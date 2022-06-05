@@ -169,7 +169,7 @@ Welcome to the Data Explorer app! A tool for filtering and visualizing data rela
         elif type_of_scatter_plot == 'Color-coded':
             custom_data = df[selected_columns_names]
             custom_data = custom_data.apply(pd.to_numeric)
-            custom_plot = sns.scatterplot(x=custom_data[X_value], y=custom_data[Y_value], hue=Hue)
+            custom_plot = sns.scatterplot(x=custom_data[X_value], y=custom_data[Y_value], hue=df[Hue])
             st.write(custom_plot)
             st.pyplot()
 
@@ -184,7 +184,8 @@ Welcome to the Data Explorer app! A tool for filtering and visualizing data rela
         elif type_of_scatter_plot == 'Multiple Regression':
             custom_data = df[selected_columns_names]
             custom_data = custom_data.apply(pd.to_numeric)
-            custom_plot = sns.lmplot(x=custom_data[X_value], y=custom_data[Y_value], hue=Hue)
+            custom_data[Hue] = df[Hue]
+            custom_plot = sns.lmplot(x=X_value, y= Y_value, hue=Hue, data = custom_data)
             st.write(custom_plot)
             st.pyplot()
 
